@@ -1,0 +1,38 @@
+{
+    "day": "Tuesday",
+    "date": "8/12/2020",
+    "workLogs": [
+        {
+            "focus": "Engineering.Editor",
+            "seconds": 2
+        },
+        {
+            "focus": "Engineering.Refactoring",
+            "seconds": 7
+        },
+        {
+            "focus": "Engineering.Game",
+            "seconds": 1
+        },
+        {
+            "focus": "Engineering.Game",
+            "seconds": 1
+        },
+        {
+            "focus": "Art",
+            "seconds": 3
+        },
+        {
+            "focus": "Engineering.Editor",
+            "seconds": 1
+        },
+        {
+            "focus": "Engineering.Game",
+            "seconds": 1
+        },
+        {
+            "focus": "Art",
+            "seconds": 4
+        }
+    ]
+}

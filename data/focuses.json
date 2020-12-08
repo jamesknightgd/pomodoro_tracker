@@ -1,0 +1,25 @@
+[
+    "General",
+
+    "Engineering.Mastery",
+
+    "Engineering.Editor",
+    "Engineering.Editor.Refactoring",
+
+    "Engineering.Game",
+    "Engineering.Game.Refactoring",
+
+    "Art",
+    "Art.Mastery",
+
+    "Design",
+    "Design.Mastery",
+    "Design.Inspiration",
+
+    "Marketing",
+    "Marketing.Mastery",
+    
+    "Production.Mastery",
+    "Production.Scheduling"
+]
+    

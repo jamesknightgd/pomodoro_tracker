@@ -1,6 +1,9 @@
 # Node Modules
 node_modules/
 
+# Built
+built/
+
 # Logs
 logs
 *.log

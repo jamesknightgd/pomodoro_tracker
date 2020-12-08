@@ -2,66 +2,39 @@ import * as React from "react"
 import { Card, CardContent, Typography, CardActions, Button, makeStyles, Box, Grid } from "@material-ui/core"
 import { PlayArrow, Pause } from "@material-ui/icons"
 
-import DailyAverageChart from "./daily_average_chart"
+//import {BlockRow, TextBlock, ChartBlock} from "./../components/blocks"
 
+import BlockRow from "./../components/blocks/row"
+import TextBlock from "./../components/blocks/text"
+import ChartBlock from "./../components/blocks/chart"
 
-export default function DayRow() 
+import HoursMinutesSeconds from "../../shared/libraries/hours_minutes_seconds/interface"
+
+import cDayString from "../../shared/libraries/day/compute/from_todays_date"
+
+export interface Props
+{
+    todaysWork        : HoursMinutesSeconds,
+    dailyAverageWork  : HoursMinutesSeconds,
+    dateToDailyWork   : {[key : string] : HoursMinutesSeconds}
+}
+export default function DayRow(props: Props) 
 {
 return (
-        <Box height="calc(100% - 4px)" width="calc(100% - 4px * 2)" m="4px" mt="0px">
+    <BlockRow margin="6px" margin_top="0px">
+        {/* Today */}
+        <TextBlock width="25%" margin_left="0px" header="Today" content={`${props.todaysWork.hours}h ${props.todaysWork.minutes}m`}/>
 
-            <Grid container direction="row" justify="center" style={{height: "100%", width: "100%"}}>
-                
-                {/* Today */}
-                <Box height="100%" width="25%" bgcolor="primary.dark">
-                    <Grid container direction="column" justify="flex-start" alignItems="center" style={{height: "100%", width: "100%"}}>
+        {/* Daily Average */}
+        <TextBlock width="25%" margin_left="2px" header={`Daily Average ${cDayString()}`} content={`${props.dailyAverageWork.hours}h ${props.dailyAverageWork.minutes}m`}/>
 
-                        <Box height="30%" pt="4px">
-                            <Typography variant="h6" color="textPrimary">{"Today"}</Typography>
-                        </Box>
-
-                        <Grid container justify="center" alignItems="center" style={{height: "35%", width: "100%"}}>
-                            <Box>
-                                <Typography variant="h2" color="textPrimary">{4}</Typography>
-                            </Box>
-                        </Grid>
-                        
-                    </Grid>
-                </Box>
-
-                {/* Daily Average */}
-                <Box height="100%" width="calc(25% - 2px)" bgcolor="primary.dark" ml="2px">
-                    <Grid container direction="column" justify="flex-start" alignItems="center" style={{height: "100%", width: "100%"}}>
-
-                        <Box height="30%" pt="4px">
-                            <Typography variant="h6" color="textPrimary">{"Daily Average (Monday)"}</Typography>
-                        </Box>
-
-                        <Grid container justify="center" alignItems="center" style={{height: "35%", width: "100%"}}>
-                            <Box>
-                                <Typography variant="h2" color="textPrimary">{4}</Typography>
-                            </Box>
-                        </Grid>
-                        
-                    </Grid>
-                </Box>
-
-                {/* Daily Average Graph */}
-                <Box height="100%" width="calc(50% - 2px)" bgcolor="primary.dark" ml="2px">
-                    <Grid container direction="column" justify="flex-start" alignItems="center" style={{height: "100%", width: "100%"}}>
-
-                        <Box height="30%" pt="4px">
-                            <Typography variant="h6" color="textPrimary">{"Daily Average (Monday)"}</Typography>
-                        </Box>
-
-                        <Grid container justify="center" alignItems="center" style={{height: "70%", width: "100%"}}>
-                            <DailyAverageChart/>
-                        </Grid>
-                        
-                    </Grid>
-                </Box>
-                
-            </Grid>
-        </Box>
+        {/* Daily Average Graph */}
+        <ChartBlock 
+            width="50%" margin_left="2px" header={`Daily Average ${cDayString()}`} id="daily-average-chart"
+            x_axis_labels={Object.keys(props.dateToDailyWork)}
+            data={Object.values(props.dateToDailyWork).map(hms => hms.hours)}
+            data_label="hours"
+        />
+    </BlockRow>
 );
 }

@@ -1,11 +1,26 @@
 import * as express from "express"
+import * as bodyParser from "body-parser"
 import * as path from "path"
 import * as fs from "fs"
 import {promisify} from "util"
 
+import handlePostWorkLog from "./request_handlers/post_work_log"
+import handleGetFocuses from "./request_handlers/get_focuses"
+import handleGetTodaysWorkTime from "./request_handlers/get_todays_work_time"
+import handleGetDailyAverageWorkTime from "./request_handlers/get_daily_average_work_time"
+import handleGetAllDaysWorkTime from "./request_handlers/get_all_days_work_time"
+import handleGetThisWeekWorkTime from "./request_handlers/get_this_weeks_work_time"
+import handleGetWeeklyAverageWorkTime from "./request_handlers/get_weekly_average_work_time"
+import handleGetEachWeeksWorkTime from "./request_handlers/get_each_weeks_work_time"
+import handleGetThisMonthWorkTime from "./request_handlers/get_this_months_work_time"
+import hangleGetAverageMonthWorkTime from "./request_handlers/get_monthly_average_work_time"
+import handleGetEachMonthsWorkTime from "./request_handlers/get_each_months_work_time"
+
 const app                     : express.Express = express()
 const port                    : number          = 8000
 const pathToFrontendResources : string = path.resolve(`..`, `frontend`)
+
+app.use(bodyParser.json())
 
 /*
     Responsibility
@@ -46,6 +61,16 @@ app.get(`/alarm.wav`,
         response.type('audio/wav').status(200).send(alarmFileData)
     })
 
-
+handlePostWorkLog(app)
+handleGetFocuses(app)
+handleGetTodaysWorkTime(app)
+handleGetDailyAverageWorkTime(app)
+handleGetAllDaysWorkTime(app)
+handleGetThisWeekWorkTime(app)
+handleGetWeeklyAverageWorkTime(app)
+handleGetEachWeeksWorkTime(app)
+handleGetThisMonthWorkTime(app)
+hangleGetAverageMonthWorkTime(app)
+handleGetEachMonthsWorkTime(app)
 
 app.listen(port, ()=>{})
